@@ -1,0 +1,48 @@
+name: show_profile_rest
+label: Get Profile information
+
+description: |
+  This skillet demonstrates a simple REST api call to a PAN-OS NGFW to view the selected profile configuration
+
+type: rest
+
+extends:
+
+labels:
+  collection:
+    - testing
+
+variables:
+  - name: TARGET_IP
+    description: Host
+    default: 127.0.0.1
+    type_hint: ip_address
+  - name: api_key
+    description: API Key
+    default: abc123
+    type_hint: text
+  - name: profile
+    description: profile type
+    default: url-filtering
+    type_hint: dropdown
+    dd_list:
+      - key: AntiVirus
+        value: virus
+      - key: AntiSpyware
+        value: spyware
+      - key: File Blocking
+        value: file-blocking
+      - key: URL Filtering
+        value: url-filtering
+      - key: Vulnerability
+        value: vulnerability
+      - key: Wildfire
+        value: wildfire-analysis
+
+
+snippets:
+  - name: profile_info
+    path: https://{{ TARGET_IP }}/api/?type=config&action=get&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/{{ profile }}&key={{ api_key }}
+    output_type: xml
+    outputs:
+
