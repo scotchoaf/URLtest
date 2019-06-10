@@ -21,11 +21,36 @@ variables:
     description: API Key
     default: abc123
     type_hint: text
+  - name: category
+    description: url category
+    default: adult
+    type_hint: dropdown
+    dd_list:
+      - key: abortion
+        value: abortion
+      - key: adult
+        value: adult
+      - key: alcohol-and-tobacco
+        value: alcohol-and-tobacco
+      - key: copyright-infringement
+        value: copyright-infringement
+      - key: dating
+        value: dating
+      - key: extremism
+        value: extremism
+      - key: gambling
+        value: gambling
 
 
 snippets:
   - name: profile_info
-    path: https://{{ TARGET_IP }}/api/?type=config&action=delete&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/url-filtering/entry[@name='Outbound-URL']/alert/member[text()='copyright-infringement']&key={{ api_key }}
+    path: https://{{ TARGET_IP }}/api/?type=config&action=delete&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/url-filtering/entry[@name='Outbound-URL']/alert/member[text()='{{ category }}']&key={{ api_key }}
+    output_type: xml
+    outputs:
+      - name: profileName
+        capture_pattern: result/{{ profile }}
+  - name: profile_info
+    path: https://{{ TARGET_IP }}/api/?type=config&action=set&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/url-filtering/entry[@name='Outbound-URL']/block/member[text()='{{ category }}']&key={{ api_key }}
     output_type: xml
     outputs:
       - name: profileName
