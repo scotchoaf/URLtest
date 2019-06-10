@@ -1,0 +1,32 @@
+name: edit_profile_rest
+label: Edit Profile information
+
+description: |
+  This skillet demonstrates a simple REST api call to a PAN-OS NGFW to view the selected profile configuration
+
+type: rest
+
+extends:
+
+labels:
+  collection:
+    - testing
+
+variables:
+  - name: TARGET_IP
+    description: Host
+    default: 127.0.0.1
+    type_hint: ip_address
+  - name: api_key
+    description: API Key
+    default: abc123
+    type_hint: text
+
+
+snippets:
+  - name: profile_info
+    path: https://{{ TARGET_IP }}/api/?type=config&action=delete&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/url-filtering/entry[@name='Outbound-URL']/alert/member[text()='copyright-infringement']&key={{ api_key }}
+    output_type: xml
+    outputs:
+      - name: profileName
+        capture_pattern: result/{{ profile }}
