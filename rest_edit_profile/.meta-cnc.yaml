@@ -50,7 +50,7 @@ snippets:
       - name: profileName
         capture_pattern: result/{{ profile }}
   - name: profile_info
-    path: https://{{ TARGET_IP }}/api/?type=config&action=set&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/url-filtering/entry[@name='Outbound-URL']/block&element=<member>{{ category }}</member></request>&key={{ api_key }}
+    path: https://{{ TARGET_IP }}/api/?type=config&action=set&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/url-filtering/entry[@name='Outbound-URL']/block&element=<member>{{ category }}</member>&key={{ api_key }}
     output_type: xml
     outputs:
       - name: profileName
