@@ -1,0 +1,37 @@
+name: view_url_profile
+# Label is what will appear in the panhandler UI
+label: See URL Profile
+
+description: |
+  This skillet demonstrates a simple REST api call to get fw url profile settings
+
+# type of skillet (panos, panorama, panorama-gpcs, python3, rest, template, or terraform)
+type: rest
+
+# Labels allow grouping and type specific options and are generally only used in advanced cases
+# the collection label will determine to which skillet collection this belongs
+labels:
+  collection:
+    - testing
+
+# this example only requires two bits of information from the operator, the licensing api_key and the authcode
+# to check
+variables:
+  - name: fw_api_key
+    description: firewall api key
+    default: ABCD
+    type_hint: text
+  - name: firewall_ip
+    description: firewall ip address
+    default: 192.168.55.10
+    type_hint: text
+
+# The snippets section is required and is a list of REST operators to perform
+snippets:
+  - name: track
+    path: https://{{ fw_ip }}//api/?type=op&cmd=<show><system><info></info></system></show>&key={{ fw_apikey }}
+    operation: post
+    #payload: payload.j2
+    #headers:
+    #  apiKey: '{{ api_key }}'
+    #  Content-Type: application/x-www-form-urlencoded
