@@ -1,0 +1,5 @@
+https://{{ TARGET_IP }}/api/?type=config&action=get&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/url-filtering&key={{ api_key }}
+    output_type: xml
+
+https://192.168.55.162/api/?type=config&action=get&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/url-filtering&key=LUFRPT0wMGUvcG9DNnFQV25SRXBQRXNYQmNheG1PZG89a1k1c2pidWNqSklrbkpzVTZRSzhGZ2U0ZUFPRk5zNTVEMmRHWEZCK0R3MlpMcTNNWWYyWThMOGRHT0pGVVFzVUx0Y080MDJORnBFV29aTTJFbnFhc1E9PQ==
+    output_type: xml
