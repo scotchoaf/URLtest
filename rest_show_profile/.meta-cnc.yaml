@@ -44,6 +44,6 @@ snippets:
   - name: profile_info
     path: https://{{ TARGET_IP }}/api/?type=config&action=get&xpath=/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/{{ profile }}&key={{ api_key }}
     output_type: xml
-    outputs:
-      - name: profileName
-        capture_pattern: result/{{ profile }}
+    #outputs:
+    #  - name: profileName
+    #    capture_pattern: result/{{ profile }}
